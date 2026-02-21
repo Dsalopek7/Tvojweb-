@@ -1,9 +1,7 @@
-// ─── DS7 Discovery Engine — Data Contracts ─────────────────────────────
-
-import type { DesignVisualIdentity, DesignDirectionState, DesignVariantId } from './types/design';
+import type { VisualStyle, VisualMood, ColorPalette, DesignVariantId, DesignVisualIdentity, DesignDirectionState } from './types/design';
 import type { Ds7UiTokens } from './tokens/types';
 
-export type { DesignVisualIdentity, DesignDirectionState, DesignVariantId, Ds7UiTokens };
+export type { DesignVisualIdentity, DesignDirectionState, DesignVariantId, Ds7UiTokens, VisualStyle, VisualMood, ColorPalette };
 
 export type WizardStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 export const TOTAL_STEPS = 12;
@@ -97,9 +95,9 @@ export type DiscoveryCanonicalModel = {
     notes?: string;
 
     visualIdentity: {
-      styles: string[];
-      moods: string[];
-      palette: string;
+      styles: VisualStyle[];
+      moods: VisualMood[];
+      palette: ColorPalette;
     };
 
     designDirection: {
@@ -216,7 +214,7 @@ export function createEmptySession(id: string): DiscoverySession {
       visualIdentity: {
         styles: [],
         moods: [],
-        palette: '',
+        palette: '' as ColorPalette,
       },
       designDirection: {
         selectedVariant: 'B',

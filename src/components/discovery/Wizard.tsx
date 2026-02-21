@@ -1,7 +1,18 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import type { DiscoverySession, WizardStep, DesignVisualIdentity, DesignDirectionState } from '@/lib/discovery/types';
+import type { 
+  DiscoveryCanonicalModel, 
+  DiscoverySession, 
+  DiscoveryInference, 
+  DiscoveryProject,
+  VisualStyle,
+  VisualMood,
+  ColorPalette,
+  DesignVisualIdentity,
+  DesignDirectionState,
+  WizardStep
+} from '@/lib/discovery/types';
 import { TOTAL_STEPS, createEmptySession } from '@/lib/discovery/types';
 import { runInference } from '@/lib/discovery/inference';
 import { SupabaseAdapter } from '@/lib/discovery/storage/SupabaseAdapter';
@@ -127,7 +138,7 @@ export default function Wizard() {
         ...session.answers, 
         visualIdentity: {
           ...session.answers.visualIdentity,
-          palette: data.visual_identity.color_palette
+          palette: data.visual_identity.color_palette as ColorPalette
         },
         // Legacy support
         style: data.style,
@@ -285,14 +296,14 @@ export default function Wizard() {
           {step === 1 && <IndustryStep value={session.answers.industry} onNext={handleIndustry} onBack={goBack} />}
           {step === 2 && <GoalsStep value={session.answers.goals} onNext={handleGoals} onBack={goBack} />}
           {step === 3 && <StyleStep value={session.answers.style || ''} visualIdentity={session.answers.visual_identity || { color_palette: '', emotional_tone: '' }} onNext={handleStyle} onBack={goBack} />}
-          {step === 4 && <VisualIdentityMultiSelect value={session.answers.visualIdentity as any} onNext={handleDesignIdentity} onBack={goBack} />}
+          {step === 4 && <VisualIdentityMultiSelect value={session.answers.visualIdentity} onNext={handleDesignIdentity} onBack={goBack} />}
           {step === 5 && session.answers.visualIdentity && (
             <DesignDirectionScreen
-              visualIdentity={session.answers.visualIdentity as any}
+              visualIdentity={session.answers.visualIdentity}
               value={{ 
                 selectedVariant: session.answers.designDirection.selectedVariant,
-                variants: [] // Variants are defined in types/design but we only store selection
-              } as any}
+                variants: [] // Variants are generated inside the component if empty
+              }}
               onNext={handleDesignDirection}
               onBack={goBack}
             />
