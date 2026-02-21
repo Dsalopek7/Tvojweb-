@@ -1,0 +1,73 @@
+import type { Ds7PaletteToken } from './types';
+
+export const PALETTES: Record<string, Ds7PaletteToken> = {
+  blue_professional: {
+    bg: '#F6F8FF',
+    surface: '#FFFFFF',
+    surface2: '#EEF2FF',
+    text: '#0B1220',
+    textMuted: '#4B5563',
+    border: '#E5E7EB',
+    primary: '#2563EB',
+    primaryHover: '#1D4ED8',
+    accent: '#60A5FA',
+    danger: '#DC2626',
+    success: '#16A34A',
+  },
+
+  purple_modern: {
+    bg: '#FAF5FF',
+    surface: '#FFFFFF',
+    surface2: '#F3E8FF',
+    text: '#140A2A',
+    textMuted: '#6B7280',
+    border: '#E5E7EB',
+    primary: '#7C3AED',
+    primaryHover: '#6D28D9',
+    accent: '#A78BFA',
+    danger: '#DC2626',
+    success: '#16A34A',
+  },
+
+  green_natural: {
+    bg: '#F0FDF4',
+    surface: '#FFFFFF',
+    surface2: '#DCFCE7',
+    text: '#052012',
+    textMuted: '#4B5563',
+    border: '#E5E7EB',
+    primary: '#16A34A',
+    primaryHover: '#15803D',
+    accent: '#4ADE80',
+    danger: '#DC2626',
+    success: '#16A34A',
+  },
+
+  neutral_elegant: {
+    bg: '#F9FAFB',
+    surface: '#FFFFFF',
+    surface2: '#F3F4F6',
+    text: '#111827',
+    textMuted: '#6B7280',
+    border: '#E5E7EB',
+    primary: '#111827',
+    primaryHover: '#0B1220',
+    accent: '#9CA3AF',
+    danger: '#DC2626',
+    success: '#16A34A',
+  },
+
+  warm_friendly: {
+    bg: '#FFF7ED',
+    surface: '#FFFFFF',
+    surface2: '#FFEDD5',
+    text: '#1A0E06',
+    textMuted: '#6B7280',
+    border: '#E5E7EB',
+    primary: '#EA580C',
+    primaryHover: '#C2410C',
+    accent: '#FB923C',
+    danger: '#DC2626',
+    success: '#16A34A',
+  },
+};
