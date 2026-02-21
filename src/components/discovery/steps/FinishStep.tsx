@@ -8,7 +8,6 @@ import {
   MOOD_OPTIONS,
   FEATURE_OPTIONS,
   PALETTE_OPTIONS,
-  EMOTIONAL_TONE_OPTIONS,
 } from '@/lib/discovery/types';
 import { downloadSessionJSON, copySessionToClipboard, sendSessionEmail } from '@/lib/discovery/serializer';
 
@@ -35,7 +34,7 @@ export default function FinishStep({ session, onUpload }: FinishStepProps) {
   };
 
   const handleEmail = async () => {
-    const to = session.email;
+    const to = session.user.email;
     if (!to) {
       alert('Nema unesene email adrese.');
       return;
@@ -85,23 +84,28 @@ export default function FinishStep({ session, onUpload }: FinishStepProps) {
         </div>
 
         <div className="summary-row">
-          <span className="summary-label">Stil</span>
-          <span className="summary-value">{labelFor(STYLE_OPTIONS, answers.style)}</span>
+          <span className="summary-label">Stilovi</span>
+          <span className="summary-value">
+            {answers.visualIdentity.styles.length > 0 
+              ? answers.visualIdentity.styles.join(', ') 
+              : (answers.style ? labelFor(STYLE_OPTIONS, answers.style) : 'Nije odabrano')}
+          </span>
         </div>
 
         <div className="summary-row">
-          <span className="summary-label">Paleta boja</span>
-          <span className="summary-value">{labelFor(PALETTE_OPTIONS, answers.visual_identity?.color_palette ?? '')}</span>
-        </div>
-
-        <div className="summary-row">
-          <span className="summary-label">Emocionalni ton</span>
-          <span className="summary-value">{labelFor(EMOTIONAL_TONE_OPTIONS, answers.visual_identity?.emotional_tone ?? '')}</span>
+          <span className="summary-label">Boje</span>
+          <span className="summary-value">
+            {answers.visualIdentity.palette || (answers.visual_identity?.color_palette ? labelFor(PALETTE_OPTIONS, answers.visual_identity.color_palette) : 'Nije odabrano')}
+          </span>
         </div>
 
         <div className="summary-row">
           <span className="summary-label">Atmosfera</span>
-          <span className="summary-value">{labelFor(MOOD_OPTIONS, answers.mood)}</span>
+          <span className="summary-value">
+            {answers.visualIdentity.moods.length > 0 
+              ? answers.visualIdentity.moods.join(', ') 
+              : (answers.mood ? labelFor(MOOD_OPTIONS, answers.mood) : 'Nije odabrano')}
+          </span>
         </div>
 
         <div className="summary-row">
@@ -124,12 +128,12 @@ export default function FinishStep({ session, onUpload }: FinishStepProps) {
             <div className="summary-row">
               <span className="summary-label">Složenost</span>
               <span className="summary-value">
-                {complexityLabel[inference.site_complexity] ?? inference.site_complexity}
+                {complexityLabel[inference.siteComplexity] ?? inference.siteComplexity}
               </span>
             </div>
             <div className="summary-row">
               <span className="summary-label">Preporučeni pristup</span>
-              <span className="summary-value">{inference.recommended_stack}</span>
+              <span className="summary-value">{inference.recommendedStack}</span>
             </div>
           </>
         )}
